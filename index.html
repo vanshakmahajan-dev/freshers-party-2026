@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Freshers Party 2026 - an evening of celebration, performances and memories for the incoming batch at SPMR College of Commerce." />
+  <title>Freshers Party 2026 | SPMR College of Commerce</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!--
+    Applies the saved theme BEFORE the page paints.
+    Without this the page flashes white for a moment before
+    script.js runs, which looks jarring in dark mode.
+  -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("spmr-freshers-theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      } catch (e) {
+        /* private mode: ignore and stay on light */
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============ HEADER + NAVIGATION ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="#top">
+        <span class="brand__mark" aria-hidden="true">SP</span>
+        <span class="brand__text">
+          Freshers Party <span class="brand__year">2026</span>
+        </span>
+      </a>
+
+      <!-- Dark / light mode toggle. Sits outside .nav so it stays visible
+           even when the mobile menu is collapsed. -->
+      <button class="theme-toggle" id="theme-toggle" type="button"
+              aria-pressed="false" title="Switch to dark mode">
+        <span class="theme-toggle__icon" aria-hidden="true"></span>
+        <span class="theme-toggle__text">Dark</span>
+      </button>
+
+      <!-- Button only becomes visible on small screens (see CSS) -->
+      <button class="nav-toggle" id="nav-toggle" type="button"
+              aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="sr-only">Open menu</span>
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="#countdown">Countdown</a></li>
+          <li><a class="nav__link" href="#schedule">Schedule</a></li>
+          <li><a class="nav__link" href="#performances">Performances</a></li>
+          <li><a class="nav__link nav__link--cta" href="#register">Register Now</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+
+        <div class="hero__content">
+          <p class="hero__eyebrow">SPMR College of Commerce &middot; Class of 2026</p>
+
+          <h1 class="hero__title" id="hero-title">Freshers Party 2026</h1>
+
+          <p class="hero__text">
+            One evening to celebrate the batch that just arrived &mdash; live music,
+            cultural performances, food stalls and a lot of new memories.
+          </p>
+
+          <dl class="hero__details">
+            <div class="hero__detail">
+              <dt>Date</dt>
+              <dd>Announced Soon</dd>
+            </div>
+            <div class="hero__detail">
+              <dt>Venue</dt>
+              <dd>BCA Department, SPMR College of Commerce</dd>
+            </div>
+            <div class="hero__detail">
+              <dt>Time</dt>
+              <dd>Doors open at 9:00 AM</dd>
+            </div>
+          </dl>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#register">Register Now</a>
+            <a class="btn btn--ghost" href="#schedule">View Schedule</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <!--
+      data-countdown-target is intentionally EMPTY.
+      While it is empty, script.js never starts a timer and the values below
+      stay at 00. When the date is announced, put the date in ISO format there,
+      e.g. data-countdown-target="2026-11-14T17:00" and the same code starts ticking.
+      Do not invent a date before it is officially confirmed.
+    -->
+    <section class="section" id="countdown" aria-labelledby="countdown-title">
+      <div class="container">
+
+        <header class="section__header">
+          <h2 class="section__title" id="countdown-title">Event Countdown</h2>
+          <p class="section__lead">We are getting the stage ready for you.</p>
+        </header>
+
+        <div class="countdown card" id="countdown-box" data-countdown-target="">
+
+          <div class="countdown__grid">
+
+            <div class="countdown__cell">
+              <span class="countdown__value" id="countdown-hours" aria-hidden="true">00</span>
+              <span class="countdown__label">Hours</span>
+            </div>
+
+            <div class="countdown__cell">
+              <span class="countdown__value" id="countdown-minutes" aria-hidden="true">00</span>
+              <span class="countdown__label">Minutes</span>
+            </div>
+
+            <div class="countdown__cell">
+              <span class="countdown__value" id="countdown-seconds" aria-hidden="true">00</span>
+              <span class="countdown__label">Seconds</span>
+            </div>
+
+          </div>
+
+          <!-- Shown only until a real date exists. Hidden by script.js afterwards. -->
+          <p class="countdown__pending" id="countdown-pending">
+            Event Date <strong>Announced Soon</strong>
+          </p>
+
+          <!-- Screen reader text, so the live countdown is announced when it starts. -->
+          <p class="sr-only" id="countdown-sr" role="timer" aria-live="polite"></p>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+
+        <header class="section__header">
+          <h2 class="section__title" id="about-title">About the Party</h2>
+          <p class="section__lead">
+            A welcome event organised by the Students' Committee for every incoming
+            student of SPMR College of Commerce.
+          </p>
+        </header>
+
+        <div class="grid grid--about">
+          <article class="card">
+            <h3 class="card__title">Who it is for</h3>
+            <p>
+              All first-year students and their families. Students bring their college
+              ID; guests are welcome with an entry pass.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card__title">What to expect</h3>
+            <p>
+              An evening of music, dance and cultural acts from across the state,
+              plus food stalls open throughout the night.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card__title">Dress code</h3>
+            <p>
+              Smart casual is encouraged. Traditional and ethnic outfits are welcome
+              &mdash; many students perform in them.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SCHEDULE ============ -->
+    <section class="section section--alt" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+
+        <header class="section__header">
+          <h2 class="section__title" id="schedule-title">Event Schedule</h2>
+          <p class="section__lead">A rough running order for the day.</p>
+        </header>
+
+        <div class="card card--flush">
+          <ol class="schedule">
+
+            <li class="schedule__row">
+              <span class="schedule__time">9:00 AM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Arrival &amp; Entry</h3>
+                <p>Guest check-in and collection of entry passes.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">9:30 AM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Welcome Address</h3>
+                <p>Principal's remarks, an alumni address and the lamp-lighting ceremony.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">10:00 AM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Fresher's Performance</h3>
+                <p>Opening act by the first-year batch, including the flash mob.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">1:00 PM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Lunch</h3>
+                <p>Food stalls open, with folk music on the College Ground.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">2:00 PM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Live Music &amp; Cultural Performances</h3>
+                <p>Classical dance, the drama sketch and the headline band.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">3:00 PM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Photo Session</h3>
+                <p>Group photographs at the College Ground.</p>
+              </div>
+            </li>
+
+            <li class="schedule__row">
+              <span class="schedule__time">4:00 PM</span>
+              <div class="schedule__info">
+                <h3 class="schedule__name">Closing</h3>
+                <p>Thank-you address and the closing note.</p>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PERFORMANCES ============ -->
+    <section class="section" id="performances" aria-labelledby="performances-title">
+      <div class="container">
+
+        <header class="section__header">
+          <h2 class="section__title" id="performances-title">Performances</h2>
+          <p class="section__lead">
+            Acts confirmed so far. More clubs will be announced closer to the date.
+          </p>
+        </header>
+
+        <div class="grid grid--cards">
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#9835;</span>
+            <h3 class="card__title">Live Band</h3>
+            <p class="card__meta">Main Stage &middot; 2:00 PM</p>
+            <p>A four-piece college band closing the evening with a full set.</p>
+          </article>
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#9836;</span>
+            <h3 class="card__title">Classical Dance</h3>
+            <p class="card__meta">College Ground &middot; 2:00 PM</p>
+            <p>Classical and semi-classical pieces by the dance club.</p>
+          </article>
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#9834;</span>
+            <h3 class="card__title">Folk Music</h3>
+            <p class="card__meta">College Ground &middot; 1:00 PM</p>
+            <p>Regional folk songs performed in local languages.</p>
+          </article>
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#127916;</span>
+            <h3 class="card__title">Drama Sketch</h3>
+            <p class="card__meta">College Ground &middot; 2:00 PM</p>
+            <p>A short comedy act written and staged by the drama club.</p>
+          </article>
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#127881;</span>
+            <h3 class="card__title">Freshers' Flash Mob</h3>
+            <p class="card__meta">Main Stage &middot; 10:00 AM</p>
+            <p>A surprise opening the crowd does not see coming.</p>
+          </article>
+
+          <article class="card card--act">
+            <span class="card__tag" aria-hidden="true">&#127881;</span>
+            <h3 class="card__title">Alumni Address</h3>
+            <p class="card__meta">College Ground &middot; 9:30 AM</p>
+            <p>Two alumni share what they wish they had known in year one.</p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ REGISTER CTA ============ -->
+    <!-- Registration + QR pass is handled by another student. This is only an anchor. -->
+    <section class="section section--alt" id="register" aria-labelledby="register-title">
+      <div class="container register">
+        <h2 class="section__title" id="register-title">Reserve your spot</h2>
+        <p class="register__text">
+          Seats are limited. Registration will open once the event date is confirmed.
+        </p>
+        <a class="btn btn--primary" href="#" aria-describedby="register-note">
+          Register Now
+        </a>
+        <p class="register__note" id="register-note">
+          Registration opens soon &mdash; the form will be added here.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+
+      <div class="site-footer__block">
+        <h2 class="site-footer__title">Freshers Party 2026</h2>
+        <p class="site-footer__text">
+          Organised by the Students' Committee,<br />
+          SPMR College of Commerce.
+        </p>
+      </div>
+
+      <div class="site-footer__block">
+        <h3 class="site-footer__subtitle">Quick links</h3>
+        <ul class="site-footer__list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#countdown">Countdown</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#performances">Performances</a></li>
+          <li><a href="#register">Register Now</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__block">
+        <h3 class="site-footer__subtitle">Contact</h3>
+        <ul class="site-footer__list">
+          <li>freshers@spmrcollege.edu</li>
+          <li>+91 98765 43210</li>
+          <li>BCA Department, SPMR College of Commerce</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="container site-footer__bottom">
+      <p>&copy; <span id="year">2026</span> SPMR College of Commerce. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
