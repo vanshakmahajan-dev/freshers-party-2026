@@ -1,0 +1,4 @@
+# Normalise line endings to LF so the deployed files stay clean.
+# Without this, Windows rewrites line endings on checkout and git
+# prints a warning on every commit.
+* text=auto eol=lf
