@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+# Runs on every push to main. Because this is a plain static site
+# (no build step), it just uploads the files and publishes them.
+on:
+  push:
+    branches: [main]
+
+# Allow one deploy at a time; never cancel one that is already running.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # This step also switches GitHub Pages on for the repository,
+      # so nobody has to click anything in Settings > Pages.
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
